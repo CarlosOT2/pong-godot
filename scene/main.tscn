@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://n0h60x7a3824"]
+
+[ext_resource type="Script" uid="uid://bkujkf7516xmm" path="res://script/player.gd" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://60mhasy4d42n" path="res://script/ball.gd" id="2_v0l8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no8bm"]
+size = Vector2(20, 178)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itxqv"]
+size = Vector2(8, 10)
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(43, 344)
+script = ExtResource("1_itxqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_no8bm")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_left = -10.0
+offset_top = -89.0
+offset_right = 10.0
+offset_bottom = 89.0
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(566, 332)
+script = ExtResource("2_v0l8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_itxqv")
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+offset_left = -4.0
+offset_top = -5.0
+offset_right = 4.0
+offset_bottom = 5.0
