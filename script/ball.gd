@@ -8,4 +8,5 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if get_last_slide_collision() != null:
-		direction.x *= -1
+		var normal = get_last_slide_collision().get_normal()
+		direction = direction.bounce(normal)

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://n0h60x7a3824"]
+[gd_scene load_steps=9 format=3 uid="uid://n0h60x7a3824"]
 
 [ext_resource type="Script" uid="uid://bkujkf7516xmm" path="res://script/player.gd" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://cjbt3spr5hnam" path="res://script/main.gd" id="1_wp4xf"]
 [ext_resource type="Script" uid="uid://60mhasy4d42n" path="res://script/ball.gd" id="2_v0l8b"]
+[ext_resource type="Script" uid="uid://hvap7ev07rmg" path="res://script/bot.gd" id="3_brvut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no8bm"]
 size = Vector2(20, 178)
@@ -9,10 +11,18 @@ size = Vector2(20, 178)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_itxqv"]
 size = Vector2(8, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0l8b"]
+size = Vector2(1232, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brvut"]
+size = Vector2(170, 644)
+
 [node name="Main" type="Node2D"]
+script = ExtResource("1_wp4xf")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(43, 344)
+motion_mode = 1
 script = ExtResource("1_itxqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -24,8 +34,23 @@ offset_top = -89.0
 offset_right = 10.0
 offset_bottom = 89.0
 
+[node name="Player2" type="CharacterBody2D" parent="."]
+position = Vector2(1100, 344)
+motion_mode = 1
+script = ExtResource("3_brvut")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+shape = SubResource("RectangleShape2D_no8bm")
+
+[node name="ColorRect" type="ColorRect" parent="Player2"]
+offset_left = -10.0
+offset_top = -89.0
+offset_right = 10.0
+offset_bottom = 89.0
+
 [node name="Ball" type="CharacterBody2D" parent="."]
 position = Vector2(566, 332)
+motion_mode = 1
 script = ExtResource("2_v0l8b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
@@ -36,3 +61,43 @@ offset_left = -4.0
 offset_top = -5.0
 offset_right = 4.0
 offset_bottom = 5.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(584, -27)
+shape = SubResource("RectangleShape2D_v0l8b")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(584, 676)
+shape = SubResource("RectangleShape2D_v0l8b")
+
+[node name="Goal 2" type="Area2D" parent="."]
+position = Vector2(1323, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal 2"]
+position = Vector2(-85, 325)
+shape = SubResource("RectangleShape2D_brvut")
+
+[node name="Goal 1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal 1"]
+position = Vector2(-85, 324.5)
+shape = SubResource("RectangleShape2D_brvut")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "0 x 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Goal 2" to="." method="_on_goal_2_body_entered"]
+[connection signal="body_entered" from="Goal 1" to="." method="_on_goal_1_body_entered"]
