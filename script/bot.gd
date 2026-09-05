@@ -4,4 +4,10 @@ extends CharacterBody2D
 
 
 func _physics_process(delta: float) -> void:
-	global_position.y = ball.global_position.y
+	var ballDirection = global_position.direction_to(ball.global_position)
+	
+	if ballDirection.y >= 0:
+		velocity.y = 255
+	else:
+		velocity.y = -255
+	move_and_slide()

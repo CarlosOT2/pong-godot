@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bbn3qpdl7oplh"
+path="res://.godot/imported/player_score.sfxr-fc8300af4e013bcd812dcc0ff439d299.sample"
+
+[deps]
+
+source_file="res://assets/player_score.sfxr"
+dest_files=["res://.godot/imported/player_score.sfxr-fc8300af4e013bcd812dcc0ff439d299.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
