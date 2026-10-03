@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://n0h60x7a3824"]
+[gd_scene load_steps=14 format=3 uid="uid://n0h60x7a3824"]
 
 [ext_resource type="Script" uid="uid://bkujkf7516xmm" path="res://script/player.gd" id="1_itxqv"]
 [ext_resource type="Script" uid="uid://cjbt3spr5hnam" path="res://script/main.gd" id="1_wp4xf"]
@@ -20,6 +20,8 @@ size = Vector2(1232, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brvut"]
 size = Vector2(170, 644)
+
+[sub_resource type="Theme" id="Theme_of57s"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_wp4xf")
@@ -199,6 +201,20 @@ text = "Reiniciar"
 [node name="MainMenu" type="Button" parent="CanvasLayer/ResultScreen/VBoxContainer"]
 layout_mode = 2
 text = "Menu Principal"
+
+[node name="CountDownLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_of57s")
+text = "COUNT DOWN"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="botScoreSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_p1hux")
