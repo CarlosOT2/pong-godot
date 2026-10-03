@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://60mhasy4d42n" path="res://script/ball.gd" id="2_v0l8b"]
 [ext_resource type="Script" uid="uid://hvap7ev07rmg" path="res://script/bot.gd" id="3_brvut"]
 [ext_resource type="AudioStream" uid="uid://dtltuwxsy6ued" path="res://assets/hit01.sfxr" id="5_0ha60"]
+[ext_resource type="Script" uid="uid://cb8cila2jifhy" path="res://script/pause_screen.gd" id="6_b5f6u"]
 [ext_resource type="AudioStream" uid="uid://bkk4m7xvfqrua" path="res://assets/bot_score.sfxr" id="6_p1hux"]
 [ext_resource type="AudioStream" uid="uid://bbn3qpdl7oplh" path="res://assets/player_score.sfxr" id="7_of57s"]
-[ext_resource type="AudioStream" uid="uid://ciwwl5w0uomai" path="res://assets/cave themeb4.ogg" id="8_of57s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no8bm"]
 size = Vector2(20, 178)
@@ -106,16 +106,112 @@ text = "0 x 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PauseScreen" type="Panel" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_b5f6u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -29.0
+offset_right = 43.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseTitle" type="RichTextLabel" parent="CanvasLayer/PauseScreen/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave][font_size=30]PAUSED"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Continuar"
+
+[node name="MainMenu" type="Button" parent="CanvasLayer/PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Menu Principal"
+
+[node name="ResultScreen" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ResultScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/ResultScreen/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="Result" type="RichTextLabel" parent="CanvasLayer/ResultScreen/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -11.5
+offset_right = 111.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=25]VOCE NÃO DEVERIA LER ISSO "
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="CanvasLayer/ResultScreen/VBoxContainer"]
+layout_mode = 2
+text = "Reiniciar"
+
+[node name="MainMenu" type="Button" parent="CanvasLayer/ResultScreen/VBoxContainer"]
+layout_mode = 2
+text = "Menu Principal"
+
 [node name="botScoreSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_p1hux")
 
 [node name="playerScoreSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_of57s")
 
-[node name="soundTrack" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_of57s")
-autoplay = true
-parameters/looping = true
-
+[connection signal="game_over" from="." to="Player2" method="_on_main_game_over"]
+[connection signal="game_over" from="." to="Ball" method="_on_main_game_over"]
+[connection signal="game_over" from="." to="CanvasLayer/PauseScreen" method="_on_main_game_over"]
 [connection signal="body_entered" from="Goal 2" to="." method="_on_goal_2_body_entered"]
 [connection signal="body_entered" from="Goal 1" to="." method="_on_goal_1_body_entered"]
+[connection signal="pressed" from="CanvasLayer/PauseScreen/VBoxContainer/PauseButton" to="CanvasLayer/PauseScreen" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseScreen/VBoxContainer/MainMenu" to="CanvasLayer/PauseScreen" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResultScreen/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResultScreen/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

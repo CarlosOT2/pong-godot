@@ -11,3 +11,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = -255
 	move_and_slide()
+
+
+func _on_main_game_over() -> void:
+	set_physics_process(false)

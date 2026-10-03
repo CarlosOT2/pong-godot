@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvd8ptqf27cvi"]
+
+[ext_resource type="AudioStream" uid="uid://ciwwl5w0uomai" path="res://assets/cave themeb4.ogg" id="1_y8ml0"]
+
+[node name="soundTrack" type="AudioStreamPlayer"]
+stream = ExtResource("1_y8ml0")
+autoplay = true
+parameters/looping = true
